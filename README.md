@@ -4,14 +4,14 @@ In this project, we use various classification methods to predict which water pu
 The original data can be found here: https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/25/ 
 
 The water pump labels to predict are:
-•	functional - the waterpoint is operational and there are no repairs needed
-•	functional needs repair - the waterpoint is operational, but needs repairs
-•	non functional - the waterpoint is not operational
+- functional - the waterpoint is operational and there are no repairs needed
+-	functional needs repair - the waterpoint is operational, but needs repairs
+-	non functional - the waterpoint is not operational
 
 The list of variables in the data include:
-•	amount_tsh - Total static head (amount water available to waterpoint)
-•	date_recorded - The date the row was entered
-•	funder - Who funded the well
+-	amount_tsh - Total static head (amount water available to waterpoint)
+-	date_recorded - The date the row was entered
+-	funder - Who funded the well
 •	gps_height - Altitude of the well
 •	installer - Organization that installed the well
 •	longitude - GPS coordinate
