@@ -1,5 +1,5 @@
 # Water Pumps
-In this project, we use various classification methods to predict which water pumps are operational and which ones do not work at all in Tanzania.
+In this project, we use various classification methods to predict which water pumps in Tanzania are operational and which ones do not work at all.
 
 The original data can be found here: https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/25/ 
 
