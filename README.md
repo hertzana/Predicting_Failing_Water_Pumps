@@ -4,7 +4,7 @@ In this project, we use various classification methods to predict which water pu
 The original data can be found here: https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/25/ 
 
 Currently, there are 4 files:
-- Water-Exploratory Data Analysis.ipynb
+- Water-Exploratory Data Analysis.ipynb: Data Exploration 
 - data_cleanup1.py: Consolidates the features 'installer' and 'funder' into larger categories, as each variable has large numbers of installers/funders
 - data_cleanup2.py: Data cleaning, normalization & standardization, filling in of missing values
 - Modeling 1.ipynb: 1st cut of modeling (more to follow) 
