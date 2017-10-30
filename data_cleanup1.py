@@ -153,24 +153,59 @@ data.groupby(['funder_type', 'status_group']).size()
 # Tanzania Government, there is a large proportion of non-functional water points.
 
 ############################## Installer ######################################################
+# Similarly, we will categorize 'installer' into categories
 
 len(data['installer'].value_counts().index.unique())
 # There are a total of #2,145 installers in the data
+
+data['installer'].value_counts()[0:50]
+# There are a large number of installers that have a large count:
+#DWE                           17402
+#Government                     1825
+#RWE                            1206
+#Commu                          1060
+#DANIDA                         1050
+#KKKT                            898
+#Hesawa                          840
+#0                               777
+#TCRS                            707
+#Central government              622
+#CES                             610
+#Community                       553
+#DANID                           552
+#District Council                551
+#HESAWA                          539
+#LGA                             408
+#World vision                    408
+#WEDECO                          397
+#TASAF                           396
+#District council                392
+#Gover                           383
+#AMREF                           329
+#TWESA                           316
+
+# For these installers, we will not re-categorize them.
+
 
 # Consolidate into installer groups
 data['installer_group'] = "Other"
 
 privateco_installer = ["^[Aa].*[G,g][Ee][Rr][Mm].*[Yy]", "[Ll][Tt][Dd]", "[C,c][Oo][Mm][Pp][Aa][Nn][Yy]*", "[Mm][Ii][Nn][Ee]", "gmbh", 
-           "Operation", "Fresh Water Plc", "Ikeuchi Towels Japan", 'construction', 'CONSTRUCT.*','[Cc][oO]$', '[Ee][Nn][Gg][Ii][Nn][Ee].*','.*[Tt][Ee][Cc][Hh].*',
+           "Operation", "Fresh Water Plc", "Ikeuchi Towels Japan", 'construction', 'CONSTRUCT.*','[Cc][oO]$', 
+           '[Ee][Nn][Gg][Ii][Nn][Ee].*','.*[Tt][Ee][Cc][Hh].*',
            '[Ll][Oo][Cc][Aa][Ll].*', '[Cc][Oo][Nn][Tt][Rr].*', '[Dd][Rr][Ii][Ll].*', '[Ww]ell.*', 'BUILD.*', 'build.*', 'TRADE.*', 
-           '[Tr]rad.*', '[Cc]onsult', '[Ww]orke[rs]+', '[Pp][Rr][Ii][Vv].*[ateyd]', '[Ii]nstitution.*', 'INSTITUTION.*', 'Enterp', 'ENTERP']
+           '[Tr]rad.*', '[Cc]onsult', '[Ww]orke[rs]+', '[Pp][Rr][Ii][Vv].*[ateyd]', '[Ii]nstitution.*', 'INSTITUTION.*', 'Enterp', 
+           'ENTERP']
 
 natlgov_list_Installer = ["[Dd]omestic", "[Tt]anzania (Gvt|Government)", "Government of Tanzania", 
-                          "Government/school", "[Mm][Ii][Nn][Ii][[Ss][Tt][Rr][Yy]", "^Rural", 'RURAL', "^Water (Authority|Department|[Bb]oar[ds]+|Sector)", 
-                          "^National", '[Cc][Ee].*[TtRr]+[Aa][Ll]*.*[gG][Oo][Vv].*[Tt]', '\/*[Gg][Oo][Vv][TtEe].*', '^[Tt][Aa][Nn][Zz]$']
+                          "Government/school", "[Mm][Ii][Nn][Ii][[Ss][Tt][Rr][Yy]", "^Rural", 'RURAL', 
+                          "^Water (Authority|Department|[Bb]oar[ds]+|Sector)", 
+                          "^National", '[Cc][Ee].*[TtRr]+[Aa][Ll]*.*[gG][Oo][Vv].*[Tt]', '\/*[Gg][Oo][Vv][TtEe].*', 
+                          '^[Tt][Aa][Nn][Zz]$']
 
 othergov_installer = ['^(Belgi|China|Egypt|Finland|Irish|Ital[iy].*|Japan).*(Government).*', 
-            '^(Canada|[Cc][Hh][ii][Nn][Aa]|[Gg][Ee][Rr][Mm].*[Yy]|Egypt|Finland|France|Frankfurt|Greec|[Hh][Oo][Ll]+[Aa][Nn][Dd]|Ital.*|Japan|Ne.*th.*|Norway.*|Swe.*d.*)$', 'JAPAN$',  'ITAL[YI]$', 
+            '^(Canada|[Cc][Hh][ii][Nn][Aa]|[Gg][Ee][Rr][Mm].*[Yy]|Egypt|Finland|France|Frankfurt|Greec|[Hh][Oo][Ll]+[Aa][Nn][Dd]|Ital.*|Japan|Ne.*th.*|Norway.*|Swe.*d.*)$', 
+            'JAPAN$',  'ITAL[YI]$', 
             '[E,e][Mm][Bb][Aa][Ss]+[Yy]', '^People.*', '^The People', '[E,e]uropean Union', 'Germany Republi.*', 'Irish Ai', 
             'Opec.*', 'Tz As.*', 'Tz Japan.*', 'U.S.A.*', '[U,u]ndp.*', 'Unesco', '[Uu]nhcr.*', 'Usaid.*', 'Swidish', '^[Uu][Nn]$', 
             'UN Habitat', 'UN ONE', 'UNDP', 'UNHCR', 'Canada.*nia$']
@@ -183,7 +218,8 @@ nonprof_installer = ['Acord', '^Action', 'Asb', 'Bingo', 'Bread', 'Busoga', '[A,
            '^[W,w]ater$', '[W,w][Ff][Pp]', 'Farm-africa', 're.*lief', 'RE.*LIEF', 'Africaone'] 
 
 religious_installer = ['[M,m].*si*l[ie][mus]+', '[C,c][Hh][Uu][Rr][CHch]+', '[S,s]ain[ts]', '[C,c].*rist[ia]+[ns]+', '[D,d]ioce[se]*', 
-             '[Aa][Nn][Gg][Ll][Ii].*', '[Mm]ethodist', '[Mm][Ii]+[Ss]+[Ii]+[Oo][Nn]+[Aa][Rr].*', '[Is]lam', 'Neemia Mission', '^[Rr][Cc].*', '[C,c]ath.*ic', 
+             '[Aa][Nn][Gg][Ll][Ii].*', '[Mm]ethodist', '[Mm][Ii]+[Ss]+[Ii]+[Oo][Nn]+[Aa][Rr].*', '[Is]lam', 'Neemia Mission', 
+             '^[Rr][Cc].*', '[C,c]ath.*ic', 
              '^[R,r]oman.*', 'Isla$', '[Bb].ptist', '^[Mm][Ii][Ss]+[Ii][ONon]*$', '[CH]+RIS[TI]+AN', 'Ndanda missions']
 
 for i in data['installer'].value_counts().index.unique().tolist():
@@ -199,7 +235,8 @@ for i in data['installer'].value_counts().index.unique().tolist():
         data.loc[data['installer']==i, 'installer_group'] = "Religious Organization"
   
 
-
+# The below installers have large counts. For these installers, we will just make sure that the name of the same organization is 
+# spelled consistently, so that there are not separate line items for each unique spelling.
 installer_relabel = {'Hesawa': ['[Hh][Ee][sS][AaEe][Ww][Aa]*'], 
                      'CES': ['^CES$'],
                      'DANIDA': ['[Dd][Aa][Nn][Ii][DdAa]+.*'], 
@@ -207,8 +244,8 @@ installer_relabel = {'Hesawa': ['[Hh][Ee][sS][AaEe][Ww][Aa]*'],
                      'Amref': ['AMREF', 'Amref'],
                      "DA": ["^[Dd][Aa]$"],
                      'ACRA': ['[Aa][Cc]+[Rr][Aa]'],
-                     "District or Community": ['[Rr][Ee][Gg][Ii][Oo][Nn]', '[Dd]istri.*', '[Cc][Oo][Uu][Nn][Cc][Ii][Ll]', "[Cc][Oo][Mm]+[Uu].*", 
-                                               '^[Vv][Ii][Ll]+.*'],
+                     "District or Community": ['[Rr][Ee][Gg][Ii][Oo][Nn]', '[Dd]istri.*', '[Cc][Oo][Uu][Nn][Cc][Ii][Ll]', 
+                                               "[Cc][Oo][Mm]+[Uu].*", '^[Vv][Ii][Ll]+.*'],
                      'ADRA': ['^Adra', '^ADRA'],
                      'DH': ['^DH$'],
                      'DMDD': ['Dmdd', 'DMDD'],
