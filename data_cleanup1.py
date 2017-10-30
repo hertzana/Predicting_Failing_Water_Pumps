@@ -513,4 +513,8 @@ data.groupby(['installer_final', 'status_group']).size()
 # DWE, Hesawa
  
 # Installers fow which majority of wells are not functional: Amref, Fini Water, LGA, RWE, TCRS, Tanzania Governmnt,
-# World Bank   
+# World Bank 
+
+# Save dataset with 'installer_group' and 'funder_type'
+data = pd.read_csv('water2.csv')
+
