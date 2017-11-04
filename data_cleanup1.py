@@ -516,5 +516,5 @@ data.groupby(['installer_final', 'status_group']).size()
 # World Bank 
 
 # Save dataset with 'installer_group' and 'funder_type'
-data = pd.read_csv('water2.csv')
+data.to_csv('water2.csv')
 
